@@ -51,4 +51,8 @@
 
 <style>
   @import "./home.less";
+  .el-carousel__container{
+    position: relative;
+    height: 450px;
+  }
 </style>
