@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Menu :menuItem="menuItem"></Menu>
     <div class="middle">
       <div class="block">
         <el-carousel style="height: 500px">
@@ -30,15 +31,21 @@
         </div>
       </el-col>
     </el-row>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-
+  import Menu from '../../components/menu/menu'
+  import Footer from '../../components/footer/footer'
   export default {
-
+    components: {
+      Menu,
+      Footer
+    },
     data(){
       return {
+        menuItem: 'index',
         goods: [],
         recommendGoods: [],
         items: ['../img/img1.jpg', '../img/img2.jpg']

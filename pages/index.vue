@@ -1,16 +1,20 @@
 <template>
   <section class="container">
     <div>
-      <Login></Login>
+
     </div>
 
   </section>
 </template>
 <script>
+  import Menu from '../components/menu/menu'
+  import Footer from '../components/footer/footer'
   import Login from './login/login.vue'
 export default {
   components: {
-    Login
+    Login,
+    Menu,
+    Footer
   }
 }
 </script>
