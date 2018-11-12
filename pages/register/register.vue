@@ -7,10 +7,6 @@
             <span>欢迎注册</span>
           </div>
           <el-form ref="registerForm" :model="formReg" :rules="rules">
-            <el-form-item prop="account">
-              <el-input v-model="formReg.account" placeholder="请输入登陆账号">
-              </el-input>
-            </el-form-item>
             <el-form-item prop="email">
               <el-input type="email" v-model="formReg.email" placeholder="请输入注册邮箱">
               </el-input>
@@ -55,12 +51,8 @@
           email: '',
           password1: '',
           password2: '',
-          account: ''
         },
         rules: {
-          account: [
-            {required: true, message: '账号不能为空', trigger: 'blur'}
-          ],
           email: [
             {required: true, message: '邮箱不能为空', trigger: 'blur'}
           ],
