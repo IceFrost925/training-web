@@ -17,11 +17,11 @@
                 </el-input>
               </el-form-item>
               <el-form-item prop="password">
-                <el-input type="password" v-model="form.password" placeholder="密码">
+                <el-input type="password" v-model="form.password" placeholder="请输入4-16位数字、字母、下划线">
                 </el-input>
               </el-form-item>
               <el-form-item>
-                <el-button @click="handleSubmit" type="primary" class="login-btn">登录</el-button>
+                <el-button @click="$handleSubmit" type="primary" class="login-btn">登录</el-button>
               </el-form-item>
             </el-form>
             <nuxt-link to="/register/register">
@@ -36,9 +36,8 @@
 </template>
 
 <script>
-
+import * as loginRequest from '../../assets/login/login'
   export default {
-
     data(){
       const validateFormat = (rule, value, callback) => {
         let reg = new RegExp('^[a-zA-Z0-9_]{4,16}$');
@@ -68,7 +67,8 @@
       }
     },
     methods: {
-      handleSubmit () {
+      $handleSubmit () {
+        loginRequest.getLogin(this);
       }
     },
 
