@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <Menu :menuItem="menuItem"></Menu>
     <div class="middle">
       <div class="block">
@@ -10,24 +10,47 @@
         </el-carousel>
       </div>
     </div>
-
-    <el-row :gutter="20" class="recommendCard">
-      <el-col :span="19" :offset="3">
+    <el-row class="recommendCard">
+      <el-col :span="24">
         <div class="goodsRecommend">
           <h3 style="text-align: center"><span>推/荐/商/品 </span>&nbsp;</h3>
         </div>
         <div class="middle-goods">
-          <!--<showGoods :course-data="goods"></showGoods>-->
+          <BookShow :books="recommendGoods"></BookShow>
         </div>
       </el-col>
     </el-row>
-    <el-row :gutter="20" class="recommendCard">
-      <el-col :span="19" :offset="3">
+    <el-row class="recommendCard">
+      <el-col :span="24">
         <div class="goodsRecommend">
           <h3 style="text-align: center"><span>最/新/商/品 </span>&nbsp;</h3>
         </div>
         <div class="middle-goods">
-          <!--<showGoods :course-data="recommendGoods"></showGoods>-->
+          <BookShow :books="lastedGoods"></BookShow>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :span="24">
+        <div class="content-bottom">
+          <div class="content-bottom-item">
+            <div class="bottom-item-title">
+              <hr class="line">
+              <el-button>动漫</el-button>
+              <hr class="line">
+            </div>
+            <ul>
+              <li>
+                <div class="li-item">
+                  <img src="../../static/img/product1.png" alt="" width="100" height="100">
+                  <div style="display: inline-block">
+                    <div class="li-item-name">啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</div>
+                    <div>￥{{222}}</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </el-col>
     </el-row>
@@ -36,27 +59,33 @@
 </template>
 
 <script>
+  import * as HomeRequest from '../../assets/home/index'
   import Menu from '../../components/menu/menu'
+  import BookShow from '../../components/book-show/index'
   import Footer from '../../components/footer/footer'
   export default {
     components: {
       Menu,
-      Footer
+      Footer,
+      BookShow
     },
     data(){
       return {
         menuItem: 'index',
-        goods: [],
+        lastedGoods: [],
         recommendGoods: [],
         items: ['../img/img1.jpg', '../img/img2.jpg']
       }
     },
     methods: {},
-
+    created(){
+      HomeRequest.getRecomment(this)
+      HomeRequest.getLastedBooks(this)
+    }
   }
 </script>
 
-<style>
+<style lang="less">
   @import "./home.less";
   .el-carousel__container{
     position: relative;

@@ -72,7 +72,6 @@
 <script>
   import * as MenuRequest from '../../assets/menu/menu'
   export default {
-    name: 'menu',
     Props: {
       menuItem: {
         type: String,
