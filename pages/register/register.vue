@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Menu :menuItem="menuItem"></Menu>
     <div class="main">
       <div class="register">
         <el-card :bordered="false">
@@ -30,12 +31,18 @@
         </el-card>
       </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+  import Menu from '../../components/menu/menu'
+  import Footer from '../../components/footer/footer'
   export default {
-
+    components: {
+      Menu,
+      Footer
+    },
     data(){
       const validateFormat = (rule, value, callback) => {
         let reg = new RegExp('^[a-zA-Z0-9_]{4,16}$');
@@ -47,6 +54,7 @@
         }
       };
       return {
+        menuItem: 'index',
         formReg: {
           email: '',
           password1: '',
@@ -85,12 +93,13 @@
 </script>
 
 <style>
-  .register{
+  .register {
     position: absolute;
     right: 300px;
     top: 20%;
     width: 350px;
   }
+
   .title {
     text-align: center;
     font-weight: 700;
@@ -102,7 +111,7 @@
     width: 100%;
   }
 
-  .turn-login{
+  .turn-login {
     margin-left: 180px;
   }
 </style>

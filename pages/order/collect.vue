@@ -1,7 +1,8 @@
 <template>
   <div>
-    <el-container class="main">
-      <el-header>
+    <Menu :menuItem="menuItem"></Menu>
+    <div class="main">
+      <div class="el-header">
           <span style="font-size: 16px">
             <nuxt-link to="/home/home">
               <el-button type="text">首页</el-button>
@@ -11,8 +12,8 @@
               <el-button type="text">我的收藏</el-button>
             </nuxt-link>
           </span>
-      </el-header>
-      <el-main>
+      </div>
+      <div class="box">
         <h1 style="color: #000000;padding-bottom: 30px">我的收藏夹</h1>
         <el-card>
           <el-table :data="tableData" style="width: 100%;">
@@ -37,17 +38,24 @@
             </el-table-column>
           </el-table>
         </el-card>
-      </el-main>
-    </el-container>
+      </div>
+    </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 
+  import Menu from '../../components/menu/menu'
+  import Footer from '../../components/footer/footer'
   export default {
-
+    components: {
+      Menu,
+      Footer
+    },
     data(){
       return {
+        menuItem: 'index',
         tableData: [{
           pic: '../img/head.png',
           bookName: '岛上书店',
@@ -75,11 +83,21 @@
 
 <style>
   .main {
-    position: absolute;
-    margin: 100px 100px;
+    margin: 0 150px;
     padding: 50px;
+    min-height: 580px;
   }
-  .el-button+.el-button {
+
+  .el-header {
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .box{
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+
+  .el-button + .el-button {
     margin-left: 0;
   }
 

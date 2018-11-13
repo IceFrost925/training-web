@@ -1,7 +1,8 @@
 <template>
   <div>
-    <el-container class="main">
-      <el-header>
+    <Menu :menuItem="menuItem"></Menu>
+    <div class="main">
+      <div class="el-header">
           <span style="font-size: 16px">
             <nuxt-link to="/home/home">
               <el-button type="text">首页</el-button>
@@ -15,98 +16,103 @@
               <el-button type="text">个人信息</el-button>
             </nuxt-link>
           </span>
-      </el-header>
-      <el-container>
-        <el-aside width="200px">
-          <el-menu>
-            <el-menu-item index="1">
-              <nuxt-link to="/info/info">
-                <el-button type="text" style="color: #000000">个人信息</el-button>
-              </nuxt-link>
-            </el-menu-item>
-            <el-menu-item index="2">
-              <nuxt-link to="/address/address">
-                <el-button type="text" style="color: #000000">收货地址</el-button>
-              </nuxt-link>
-            </el-menu-item>
-            <el-menu-item index="3">
-              <nuxt-link to="/password/password">
-                <el-button type="text" style="color: #000000">修改密码</el-button>
-              </nuxt-link>
-            </el-menu-item>
-          </el-menu>
-        </el-aside>
-        <el-main>
-          <div class="infoBox">
-            <h3>
-              <strong>个人信息</strong>
-            </h3>
-            <div class="border"></div>
-            <div class="info-wapper">
-              <div class="infoItem">
-                <label class="pull-left">昵称</label>
-                <div class="pull-leftt">
-                  {{name}}
-                  <el-button class="btn-edit" type="text" @click="outerVisible = true">
-                    <i class="el-icon-edit"></i>编辑
-                  </el-button>
-                </div>
+      </div>
+      <div class="aside">
+        <el-menu>
+          <el-menu-item index="1">
+            <nuxt-link to="/info/info">
+              <el-button type="text" style="color: #000000">个人信息</el-button>
+            </nuxt-link>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <nuxt-link to="/address/address">
+              <el-button type="text" style="color: #000000">收货地址</el-button>
+            </nuxt-link>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <nuxt-link to="/password/password">
+              <el-button type="text" style="color: #000000">修改密码</el-button>
+            </nuxt-link>
+          </el-menu-item>
+        </el-menu>
+      </div>
+      <div class="infoBox">
+        <div class="box">
+          <h3>
+            <strong>个人信息</strong>
+          </h3>
+          <div class="border"></div>
+          <div class="info-wapper">
+            <div class="infoItem">
+              <label class="pull-left">昵称</label>
+              <div class="pull-leftt">
+                {{name}}
+                <el-button class="btn-edit" type="text" @click="outerVisible = true">
+                  <i class="el-icon-edit"></i>编辑
+                </el-button>
               </div>
-              <div class="infoItem">
-                <label class="pull-left">邮箱</label>
-                <div class="pull-leftt">
-                  {{email}}
-                  <el-button class="btn-edit" type="text" @click="outerVisible1 = true">
-                    <i class="el-icon-edit"></i>编辑
-                  </el-button>
-                </div>
+            </div>
+            <div class="infoItem">
+              <label class="pull-left">邮箱</label>
+              <div class="pull-leftt">
+                {{email}}
+                <el-button class="btn-edit" type="text" @click="outerVisible1 = true">
+                  <i class="el-icon-edit"></i>编辑
+                </el-button>
               </div>
-              <div class="infoItem">
-                <label class="pull-left">联系电话</label>
-                <div class="pull-leftt">
-                  {{phone}}
-                  <el-button class="btn-edit" type="text" @click="outerVisible2 = true">
-                    <i class="el-icon-edit"></i>编辑
-                  </el-button>
-                </div>
+            </div>
+            <div class="infoItem">
+              <label class="pull-left">联系电话</label>
+              <div class="pull-leftt">
+                {{phone}}
+                <el-button class="btn-edit" type="text" @click="outerVisible2 = true">
+                  <i class="el-icon-edit"></i>编辑
+                </el-button>
               </div>
             </div>
           </div>
-          <!--<el-dialog title="修改昵称" :visible.sync="outerVisible">-->
-          <!--<div slot="footer" class="dialog-footer">-->
-          <!--<el-input v-model="name" :placeholder="userInfo.firstName" style="padding: 0px 10px 50px 10px;"></el-input>-->
-          <!--<el-button @click="outerVisible = false">取 消</el-button>-->
-          <!--<el-button type="primary" @click="$rewrite">修改</el-button>-->
-          <!--</div>-->
-          <!--</el-dialog>-->
+        </div>
+      </div>
+      <!--<el-dialog title="修改昵称" :visible.sync="outerVisible">-->
+      <!--<div slot="footer" class="dialog-footer">-->
+      <!--<el-input v-model="name" :placeholder="userInfo.firstName" style="padding: 0px 10px 50px 10px;"></el-input>-->
+      <!--<el-button @click="outerVisible = false">取 消</el-button>-->
+      <!--<el-button type="primary" @click="$rewrite">修改</el-button>-->
+      <!--</div>-->
+      <!--</el-dialog>-->
 
-          <!--<el-dialog title="修改邮箱" :visible.sync="outerVisible1">-->
-          <!--<div slot="footer" class="dialog-footer">-->
-          <!--<el-input v-model="email" :placeholder="userInfo.email" style="padding: 0px 10px 50px 10px;"></el-input>-->
-          <!--<el-button @click="outerVisible1 = false">取 消</el-button>-->
-          <!--<el-button type="primary" @click="$rewrite">修改</el-button>-->
-          <!--</div>-->
-          <!--</el-dialog>-->
+      <!--<el-dialog title="修改邮箱" :visible.sync="outerVisible1">-->
+      <!--<div slot="footer" class="dialog-footer">-->
+      <!--<el-input v-model="email" :placeholder="userInfo.email" style="padding: 0px 10px 50px 10px;"></el-input>-->
+      <!--<el-button @click="outerVisible1 = false">取 消</el-button>-->
+      <!--<el-button type="primary" @click="$rewrite">修改</el-button>-->
+      <!--</div>-->
+      <!--</el-dialog>-->
 
-          <!--<el-dialog title="修改个性签名" :visible.sync="outerVisible2">-->
-          <!--<div slot="footer" class="dialog-footer">-->
-          <!--<el-input v-model="sign" :placeholder="userInfo.lastName" style="padding: 0px 10px 50px 10px;"></el-input>-->
-          <!--<el-button @click="outerVisible2 = false">取 消</el-button>-->
-          <!--<el-button type="primary" @click="$rewrite">修改</el-button>-->
-          <!--</div>-->
-          <!--</el-dialog>-->
-        </el-main>
-      </el-container>
-    </el-container>
+      <!--<el-dialog title="修改个性签名" :visible.sync="outerVisible2">-->
+      <!--<div slot="footer" class="dialog-footer">-->
+      <!--<el-input v-model="sign" :placeholder="userInfo.lastName" style="padding: 0px 10px 50px 10px;"></el-input>-->
+      <!--<el-button @click="outerVisible2 = false">取 消</el-button>-->
+      <!--<el-button type="primary" @click="$rewrite">修改</el-button>-->
+      <!--</div>-->
+      <!--</el-dialog>-->
+    </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 
+  import Menu from '../../components/menu/menu'
+  import Footer from '../../components/footer/footer'
   export default {
-
+    components: {
+      Menu,
+      Footer
+    },
     data(){
       return {
+        menuItem: 'index',
         outerVisible: false,
         outerVisible1: false,
         outerVisible2: false,
@@ -130,21 +136,26 @@
 
 <style>
   .main {
-    position: absolute;
-    margin: 100px 100px;
+    margin: 0 150px;
     padding: 50px;
+    min-height: 580px;
   }
 
   .infoBox {
     position: absolute;
-    left: 300px;
-    top: 100px;
-    width: 770px;
+    top: 370px;
+    left: 450px;
+  }
+
+  .aside {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
   }
 
   .border {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     border-bottom: 2px solid #e0dddd;
     height: 10px;
   }

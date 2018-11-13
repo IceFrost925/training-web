@@ -1,7 +1,8 @@
 <template>
   <div>
-    <el-container class="main">
-      <el-header>
+    <Menu :menuItem="menuItem"></Menu>
+    <div class="main">
+      <div class="el-header">
           <span style="font-size: 16px">
             <nuxt-link to="/home/home">
               <el-button type="text">首页</el-button>
@@ -15,56 +16,59 @@
               <el-button type="text">修改密码</el-button>
             </nuxt-link>
           </span>
-      </el-header>
-      <el-container>
-        <el-aside width="200px">
-          <el-menu>
-            <el-menu-item index="1">
-              <nuxt-link to="/info/info">
-                <el-button type="text" style="color: #000000">个人信息</el-button>
-              </nuxt-link>
-            </el-menu-item>
-            <el-menu-item index="2">
-              <nuxt-link to="/address/address">
-                <el-button type="text" style="color: #000000">收货地址</el-button>
-              </nuxt-link>
-            </el-menu-item>
-            <el-menu-item index="3">
-              <nuxt-link to="/password/password">
-                <el-button type="text" style="color: #000000">修改密码</el-button>
-              </nuxt-link>
-            </el-menu-item>
-          </el-menu>
-        </el-aside>
-        <el-main>
-          <div class="infoBox">
-            <h3>
-              <strong>修改密码</strong>
-            </h3>
-            <div class="border"></div>
-            <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px">
-              <el-form-item label="输入密码" prop="psd1">
-                <el-input type="password" v-model="ruleForm.psd1"></el-input>
-              </el-form-item>
-              <el-form-item label="确认密码"  prop="psd2">
-                <el-input type="password" v-model="ruleForm.psd2"></el-input>
-              </el-form-item>
-              <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">修改</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
-              </el-form-item>
-            </el-form>
-          </div>
-        </el-main>
-      </el-container>
-    </el-container>
+      </div>
+      <div class="aside">
+        <el-menu>
+          <el-menu-item index="1">
+            <nuxt-link to="/info/info">
+              <el-button type="text" style="color: #000000">个人信息</el-button>
+            </nuxt-link>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <nuxt-link to="/address/address">
+              <el-button type="text" style="color: #000000">收货地址</el-button>
+            </nuxt-link>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <nuxt-link to="/password/password">
+              <el-button type="text" style="color: #000000">修改密码</el-button>
+            </nuxt-link>
+          </el-menu-item>
+        </el-menu>
+      </div>
+      <div class="infoBox">
+        <div class="box">
+          <h3>
+            <strong>修改密码</strong>
+          </h3>
+          <div class="border"></div>
+          <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px">
+            <el-form-item label="输入密码" prop="psd1">
+              <el-input type="password" v-model="ruleForm.psd1"></el-input>
+            </el-form-item>
+            <el-form-item label="确认密码" prop="psd2">
+              <el-input type="password" v-model="ruleForm.psd2"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="submitForm('ruleForm')">修改</el-button>
+              <el-button @click="resetForm('ruleForm')">重置</el-button>
+            </el-form-item>
+          </el-form>
+        </div>
+      </div>
+    </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-
+  import Menu from '../../components/menu/menu'
+  import Footer from '../../components/footer/footer'
   export default {
-
+    components: {
+      Menu,
+      Footer
+    },
     data(){
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -95,6 +99,7 @@
         }
       };
       return {
+        menuItem: 'index',
         ruleForm: {
           psd1: '',
           psd2: ''
@@ -132,22 +137,36 @@
 
 <style>
   .main {
-    position: absolute;
-    margin: 100px 100px;
+    margin: 0 150px;
     padding: 50px;
+    min-height: 500px;
+  }
+
+  .el-header {
+    padding: 0 20px;
+    box-sizing: border-box;
   }
 
   .infoBox {
     position: absolute;
-    left: 300px;
-    top: 100px;
-    width: 770px;
+    top: 370px;
+    left: 450px;
+  }
+
+  .aside {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
   }
 
   .border {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     border-bottom: 2px solid #e0dddd;
     height: 10px;
+  }
+
+  .box {
+    width: 650px;
   }
 </style>
