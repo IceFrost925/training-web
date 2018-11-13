@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Menu :menuItem="menuItem"></Menu>
     <div class="main">
       <div class="register">
         <el-card :bordered="false">
@@ -31,7 +30,6 @@
         </el-card>
       </div>
     </div>
-    <Footer></Footer>
   </div>
 </template>
 

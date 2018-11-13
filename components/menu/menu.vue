@@ -7,8 +7,8 @@
       <el-row class="menu-row1">
         <el-col :span="12">
           <span>尊敬的用户您好！</span>
-          <nuxt-link to="#">[登录]</nuxt-link>
-          <nuxt-link to="#">[注册]</nuxt-link>
+          <nuxt-link to="../../login/login">[登录]</nuxt-link>
+          <nuxt-link to="../../register/register">[注册]</nuxt-link>
         </el-col>
         <el-col :span="12" class="top-menu-right">
         <span><el-dropdown @command="handleCommand">
@@ -20,8 +20,8 @@
             <el-dropdown-item command="b">会员登陆</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown></span>
-          <nuxt-link to="#">收藏 ({{wishList}})</nuxt-link>
-          <nuxt-link to="#">购物车</nuxt-link>
+          <nuxt-link to="../../order/collect">收藏 ({{wishList}})</nuxt-link>
+          <nuxt-link to="../../order/shopping">购物车</nuxt-link>
           <nuxt-link to="#">结账</nuxt-link>
         </el-col>
       </el-row>
