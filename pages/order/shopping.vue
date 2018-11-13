@@ -1,7 +1,8 @@
 <template>
   <div>
-    <el-container class="main">
-      <el-header>
+    <Menu :menuItem="menuItem"></Menu>
+    <div class="main">
+      <div class="el-header">
           <span style="font-size: 16px">
             <nuxt-link to="/home/home">
               <el-button type="text">首页</el-button>
@@ -11,10 +12,10 @@
               <el-button type="text">我的购物车</el-button>
             </nuxt-link>
           </span>
-      </el-header>
-      <el-main>
+      </div>
+      <div class="buy-box">
         <h1 style="color: #000000;padding-bottom: 30px">购物车内的商品</h1>
-        <el-card >
+        <el-card>
           <el-table :data="tableData" style="width: 100%;">
             <el-table-column fixed prop="pic" label="图片" width="150" height="200">
               <!--<template slot-scope="scope">-->
@@ -41,17 +42,23 @@
             <el-button type="primary">去结账</el-button>
           </div>
         </el-card>
-      </el-main>
-    </el-container>
+      </div>
+    </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-
+  import Menu from '../../components/menu/menu'
+  import Footer from '../../components/footer/footer'
   export default {
-
+    components: {
+      Menu,
+      Footer
+    },
     data(){
       return {
+        menuItem: 'index',
         tableData: [{
           pic: '../img/head.png',
           bookName: '岛上书店',
@@ -83,9 +90,19 @@
 
 <style>
   .main {
-    position: absolute;
-    margin: 100px 100px;
+    margin: 0 150px;
     padding: 50px;
+    min-height: 580px;
+  }
+
+  .el-header {
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .buy-box {
+    padding-top: 20px;
+    padding-left: 20px;
   }
 
   .box {

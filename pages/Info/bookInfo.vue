@@ -1,7 +1,8 @@
 <template>
   <div>
-    <el-container class="main">
-      <el-header>
+    <Menu :menuItem="menuItem"></Menu>
+    <div class="main">
+      <div class="el-header">
           <span style="font-size: 16px">
             <nuxt-link to="/home/home">
               <el-button type="text">首页</el-button>
@@ -11,34 +12,32 @@
               <el-button type="text">{{bookName}}</el-button>
             </nuxt-link>
           </span>
-      </el-header>
-      <el-container>
-        <el-aside width="500px">
-          <img :src="productImg" style="width: 500px;height: 500px"/>
-        </el-aside>
-        <el-main>
-          <div class="box" style="padding-bottom: 30px">
-            <h2>{{bookName}}</h2>
-          </div>
-          <div class="box">
-            <span>型号</span><span style="padding-left: 80px">{{bookNumber}}</span>
-            <h2></h2>
-            <span>库存状态</span><span style="padding-left: 50px">{{bookCount}}</span>
-          </div>
-          <div class="box">
-            <span style="font-size: 36px">￥{{bookPrice}}</span>
-          </div>
-          <div class="box">
-            <el-input-number size="small" v-model="buyNumber"></el-input-number>
-            <el-button type="danger" round size="small">加入购物车</el-button>
-            <h1 style="padding-top: 10px "></h1>
-            <span><i class="el-icon-star-off"></i>
+      </div>
+      <div>
+        <img :src="productImg" style="width: 400px;height: 400px;padding-top: 20px"/>
+      </div>
+      <el-main>
+        <div class="box" style="padding-bottom: 30px">
+          <h2>{{bookName}}</h2>
+        </div>
+        <div class="box">
+          <span>型号</span><span style="padding-left: 80px">{{bookNumber}}</span>
+          <h2></h2>
+          <span>库存状态</span><span style="padding-left: 50px">{{bookCount}}</span>
+        </div>
+        <div class="box">
+          <span style="font-size: 36px">￥{{bookPrice}}</span>
+        </div>
+        <div class="box">
+          <el-input-number size="small" v-model="buyNumber"></el-input-number>
+          <el-button type="danger" round size="small">加入购物车</el-button>
+          <h1 style="padding-top: 10px "></h1>
+          <span><i class="el-icon-star-off"></i>
               <el-button type="text" class="collect_btn">收藏</el-button>
               <el-rate v-model="value" disabled show-score text-color="#ff9900" score-template="{value}"></el-rate>
             </span>
-          </div>
-        </el-main>
-      </el-container>
+        </div>
+      </el-main>
       <div class="border">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="商品描述" name="first">
@@ -84,16 +83,22 @@
           </el-tab-pane>
         </el-tabs>
       </div>
-    </el-container>
+    </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-
+  import Menu from '../../components/menu/menu'
+  import Footer from '../../components/footer/footer'
   export default {
-
+    components: {
+      Menu,
+      Footer
+    },
     data(){
       return {
+        menuItem: 'index',
         bookName: '追风筝的人',
         productImg: '../img/product1.png',
         bookNumber: '111100',
@@ -141,9 +146,14 @@
 
 <style>
   .main {
-    position: absolute;
-    margin: 100px 100px;
+    margin: 0 150px;
     padding: 50px;
+    min-height: 580px;
+  }
+
+  .el-header {
+    padding: 0 20px;
+    box-sizing: border-box;
   }
 
   .box {
@@ -181,9 +191,11 @@
     margin-bottom: 8px;
     padding: 8px 10px 10px;
   }
+
   img {
     float: left;
   }
+
   .user-name {
     display: block;
     margin-top: 5px;
@@ -192,6 +204,7 @@
     margin-left: 25px;
     font-weight: 700;
   }
+
   .user-comment {
     font-size: 14px;
   }
