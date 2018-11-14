@@ -43,7 +43,70 @@
               <li>
                 <div class="li-item">
                   <img src="../../static/img/product1.png" alt="" width="100" height="100">
-                  <div style="display: inline-block">
+                  <div class="li-item-right">
+                    <div class="li-item-name">啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</div>
+                    <div>￥{{222}}</div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="li-item">
+                  <img src="../../static/img/product1.png" alt="" width="100" height="100">
+                  <div class="li-item-right">
+                    <div class="li-item-name">啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</div>
+                    <div>￥{{222}}</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-bottom-item">
+            <div class="bottom-item-title">
+              <hr class="line">
+              <el-button>文学</el-button>
+              <hr class="line">
+            </div>
+            <ul>
+              <li>
+                <div class="li-item">
+                  <img src="../../static/img/product1.png" alt="" width="100" height="100">
+                  <div class="li-item-right">
+                    <div class="li-item-name">啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</div>
+                    <div>￥{{222}}</div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="li-item">
+                  <img src="../../static/img/product1.png" alt="" width="100" height="100">
+                  <div class="li-item-right">
+                    <div class="li-item-name">啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</div>
+                    <div>￥{{222}}</div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="content-bottom-item">
+            <div class="bottom-item-title">
+              <hr class="line">
+              <el-button>科学</el-button>
+              <hr class="line">
+            </div>
+            <ul>
+              <li>
+                <div class="li-item">
+                  <img src="../../static/img/product1.png" alt="" width="100" height="100">
+                  <div class="li-item-right">
+                    <div class="li-item-name">啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</div>
+                    <div>￥{{222}}</div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="li-item">
+                  <img src="../../static/img/product1.png" alt="" width="100" height="100">
+                  <div class="li-item-right">
                     <div class="li-item-name">啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</div>
                     <div>￥{{222}}</div>
                   </div>

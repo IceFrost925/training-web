@@ -12,11 +12,11 @@
               </el-input>
             </el-form-item>
             <el-form-item prop="password1">
-              <el-input type="password" v-model="formReg.password1" placeholder="请输入密码">
+              <el-input type="password" v-model="formReg.password1" placeholder="4-16位数字、字母、下划线">
               </el-input>
             </el-form-item>
             <el-form-item prop="password2">
-              <el-input type="password" v-model="formReg.password2" placeholder="请确认密码">
+              <el-input type="password" v-model="formReg.password2" placeholder="4-16位数字、字母、下划线">
               </el-input>
             </el-form-item>
 
@@ -36,6 +36,7 @@
 <script>
   import Menu from '../../components/menu/menu'
   import Footer from '../../components/footer/footer'
+  import * as loginRequest from '../../assets/login/login'
   export default {
     components: {
       Menu,
