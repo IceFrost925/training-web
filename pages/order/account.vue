@@ -157,6 +157,8 @@
 
   .pay-card{
     height: 300px;
+    text-align: center;
+    padding-top: 130px;
   }
   .next-btn {
     margin-top: 30px;
