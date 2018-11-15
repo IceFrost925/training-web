@@ -53,3 +53,19 @@
     }
   }
 }
+.el-card__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .shop-card-right{
+    padding: 14px;
+    display: inline-flex;
+    .shop-card-name{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+  }
+}
