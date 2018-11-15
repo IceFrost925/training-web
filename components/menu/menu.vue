@@ -5,7 +5,7 @@
   <div class="menu">
     <div class="menu-content">
       <el-row class="menu-row1">
-        <el-col :span="12" v-if="!loginFlag">
+        <el-col :span="12" v-if="loginFlag">
           <span>尊敬的用户您好！</span>
           <nuxt-link to="../../login/login">[登录]</nuxt-link>
           <nuxt-link to="../../register/register">[注册]</nuxt-link>
@@ -13,7 +13,7 @@
         <el-col :span="12" v-else>
           <span>尊敬的{{username}}用户您好！</span>
         </el-col>
-        <el-col :span="12" class="top-menu-right" v-if="!loginFlag">
+        <el-col :span="12" class="top-menu-right" v-if="loginFlag">
         <span><el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             会员中心<i class="el-icon-arrow-down el-icon--right"></i>
@@ -102,7 +102,7 @@
     },
     data() {
       return {
-        loginFlag: false,
+        loginFlag: true,
         menuList: [],
         wishList: 0,
         shoppingCount: 0,
@@ -120,7 +120,7 @@
           Cookies.set("suserId","",-1)
           Cookies.set("username","",-1)
           Cookies.set("email","",-1)
-          this.loginFlag = false
+          this.loginFlag = true
         }
       },
       handleSelect(key, keyPath) {
@@ -131,8 +131,12 @@
       }
     },
     created() {
-      if (Cookies.get("suserId") !== null || Cookies.get("suserId") !== undefined) {
-        this.loginFlag = true
+      console.log(111,Cookies.get("suserId"))
+      if (Cookies.get("suserId") == null || typeof(Cookies.get("suserId")) == undefined) {
+
+      }else{
+        console.log(111111111111)
+        this.loginFlag = false
         this.username = Cookies.get("email")
         if (Cookies.get("username") != 'null') {
           this.username = Cookies.get("username")
