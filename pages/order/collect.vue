@@ -56,7 +56,8 @@
     data(){
       return {
         menuItem: 'index',
-        tableData: [{
+        tableData: [
+            {
           pic: '../img/head.png',
           bookName: '岛上书店',
           bookNumber: '111111',
@@ -69,7 +70,8 @@
             bookNumber: '111111',
             number: '2411',
             price: '100',
-          }]
+          }
+          ]
       }
     },
     methods: {

@@ -13,8 +13,8 @@
             </nuxt-link>
           </span>
       </div>
-      <div>
-        <img :src="productImg" style="width: 400px;height: 400px;padding-top: 20px"/>
+      <div class="aside">
+        <img :src="productImg" style="width: 400px;height: 400px"/>
       </div>
       <el-main>
         <div class="box" style="padding-bottom: 30px">
@@ -57,7 +57,7 @@
               <div v-if="commentStatus">
                 <div v-for="o in 4" :key="o">
                   <el-card class="box-card comment shape ">
-                    <img src=" " height="60" width="60"/>
+                    <img :src=" head" height="60" width="60"/>
                     <span class="user-name">{{userName}}</span>
                     <p class="user-comment">{{userComment}}</p>
                   </el-card>
@@ -113,6 +113,7 @@
         '发现一个惊天谎言，儿时的噩梦再度重演，阿米尔该如何抉择？故事如此残忍而又美丽，作者以温暖细腻的笔法' +
         '勾勒人性的本质与救赎，读来令人荡气回肠。',
         commentStatus: true,
+        head:'../img/head1.png',
         userName: '冯世杰',
         userComment: 'jsdjfkjefewjkns人家可能那就是发表哦i看你发的是iOK美式咖啡' +
         '电脑发快递师傅你就开始地方搞大锅饭大概多少广泛大锅饭大锅饭大概',
@@ -154,6 +155,12 @@
   .el-header {
     padding: 0 20px;
     box-sizing: border-box;
+  }
+
+  .aside {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 500px;
   }
 
   .box {
