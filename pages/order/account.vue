@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <div>
     <Menu :menuItem="menuItem"></Menu>
     <div class="main">
@@ -30,10 +30,10 @@
       <div class="address-info" v-if="active === 0">
         <el-card class="address-box">
           <div slot="header" class="clearfix">
-            <span><strong>{{personName}}</strong></span><span>&nbsp;收</span>
+            <span style="font-size: 18px"><strong>{{personName}}</strong></span><span>&nbsp;收</span>
             <el-button style="float: right; padding: 3px 0" type="success" icon="el-icon-check" circle></el-button>
           </div>
-          {{personPhone}}<h1></h1>{{personAddress}}
+          <h3>{{personPhone}}</h3><h3 style="padding-top: 10px">{{personAddress}}</h3>
         </el-card>
       </div>
       <div class="goods-info" v-if="active === 1">
@@ -157,9 +157,14 @@
 
   .pay-card{
     height: 300px;
+    text-align: center;
+    padding-top: 130px;
   }
   .next-btn {
     margin-top: 30px;
     text-align: center;
+  }
+  .el-card__body {
+    display: inherit;
   }
 </style>
