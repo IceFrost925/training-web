@@ -40,12 +40,16 @@
         <div class="box">
           <h3><strong>收货地址</strong>
             <el-button style="float: right; padding: 8px; height: 30px;" type="primary"
-            round @click="outerVisible = true">添加地址</el-button></h3>
+                       round @click="outerVisible = true">添加地址
+            </el-button>
+          </h3>
           <div class="border"></div>
           <el-card class="address-card">
             <div slot="header">
               <h3>已有收货地址
-                <el-button style="float: right; padding: 3px ;width: 30px;height: 30px;" type="primary"
+                <el-button style="float: right; padding: 3px ;width: 30px;height: 30px;" type="danger"
+                           icon="el-icon-delete" circle></el-button>
+                <el-button style="float: right; padding: 3px ;width: 30px;height: 30px; margin-right: 5px;" type="primary"
                            icon="el-icon-edit" circle @click="outerVisible = true"></el-button>
               </h3>
             </div>
