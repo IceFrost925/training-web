@@ -7,8 +7,10 @@
       <el-row class="menu-row1">
         <el-col :span="12" v-if="loginFlag">
           <span>尊敬的用户您好！</span>
-          <nuxt-link to="../../login/login">[登录]</nuxt-link>
-          <nuxt-link to="../../register/register">[注册]</nuxt-link>
+          <span>
+            <nuxt-link to="../../login/login">[登录]</nuxt-link>
+            <nuxt-link to="../../register/register">[注册]</nuxt-link>
+          </span>
         </el-col>
         <el-col :span="12" v-else>
           <span>尊敬的{{username}}用户您好！</span>

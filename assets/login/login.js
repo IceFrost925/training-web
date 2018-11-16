@@ -34,6 +34,7 @@ export const getLogin = (vm) => {
         vm.$message.success('登录成功')
         Cookies.set('username', rep.data.data.username);
         Cookies.set('email', rep.data.data.email);
+        Cookies.set('phone', rep.data.data.tell);
         Cookies.set('suserId', rep.data.data.id);
         vm.$router.push({
           name: 'index'

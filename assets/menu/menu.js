@@ -15,7 +15,16 @@ export const getShoppingCount = (vm,id) => {
   vm.$axios.post('/permit/shopping/select/userId', data)
     .then(rep => {
       if (rep.data.data.length>=0) {
+        let TotalPrice = 0
+        rep.data.data.forEach(item =>{
+          TotalPrice += parseInt(item.number) * item.bookId.price
+        })
+
+        Cookies.set('shoppingCount', rep.data.data.length);
+        Cookies.set('TotalPrice', TotalPrice.toFixed(2));
         vm.shopCardList = rep.data.data
+      }else{
+        Cookies.set('shoppingCount', 0);
       }
     })
     .catch(function () {

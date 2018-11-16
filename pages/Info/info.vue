@@ -73,53 +73,56 @@
           </div>
         </div>
       </div>
-      <!--<el-dialog title="修改昵称" :visible.sync="outerVisible">-->
-      <!--<div slot="footer" class="dialog-footer">-->
-      <!--<el-input v-model="name" :placeholder="userInfo.firstName" style="padding: 0px 10px 50px 10px;"></el-input>-->
-      <!--<el-button @click="outerVisible = false">取 消</el-button>-->
-      <!--<el-button type="primary" @click="$rewrite">修改</el-button>-->
-      <!--</div>-->
-      <!--</el-dialog>-->
+      <el-dialog title="修改昵称" :visible.sync="outerVisible">
+        <div slot="footer" class="dialog-footer">
+          <el-input v-model="name" placeholder="请输入内容" style="padding: 0px 10px 50px 10px;"></el-input>
+          <el-button @click="outerVisible = false">取 消</el-button>
+          <el-button type="primary" @click="$rewrite">修改</el-button>
+        </div>
+      </el-dialog>
 
-      <!--<el-dialog title="修改邮箱" :visible.sync="outerVisible1">-->
-      <!--<div slot="footer" class="dialog-footer">-->
-      <!--<el-input v-model="email" :placeholder="userInfo.email" style="padding: 0px 10px 50px 10px;"></el-input>-->
-      <!--<el-button @click="outerVisible1 = false">取 消</el-button>-->
-      <!--<el-button type="primary" @click="$rewrite">修改</el-button>-->
-      <!--</div>-->
-      <!--</el-dialog>-->
+      <el-dialog title="修改邮箱" :visible.sync="outerVisible1">
+        <div slot="footer" class="dialog-footer">
+          <el-input v-model="email" placeholder="请输入内容" style="padding: 0px 10px 50px 10px;"></el-input>
+          <el-button @click="outerVisible1 = false">取 消</el-button>
+          <el-button type="primary" @click="$rewrite">修改</el-button>
+        </div>
+      </el-dialog>
 
-      <!--<el-dialog title="修改个性签名" :visible.sync="outerVisible2">-->
-      <!--<div slot="footer" class="dialog-footer">-->
-      <!--<el-input v-model="sign" :placeholder="userInfo.lastName" style="padding: 0px 10px 50px 10px;"></el-input>-->
-      <!--<el-button @click="outerVisible2 = false">取 消</el-button>-->
-      <!--<el-button type="primary" @click="$rewrite">修改</el-button>-->
-      <!--</div>-->
-      <!--</el-dialog>-->
+      <el-dialog title="修改电话" :visible.sync="outerVisible2">
+        <div slot="footer" class="dialog-footer">
+          <el-input v-model="phone" placeholder="请输入内容" style="padding: 0px 10px 50px 10px;"></el-input>
+          <el-button @click="outerVisible2 = false">取 消</el-button>
+          <el-button type="primary" @click="$rewrite">修改</el-button>
+        </div>
+      </el-dialog>
     </div>
     <Footer></Footer>
   </div>
 </template>
 
 <script>
-
+  import Cookies from 'js-cookie'
+  import * as InfoRequest from '../../assets/info/info'
   import Menu from '../../components/menu/menu'
   import Footer from '../../components/footer/footer'
+
   export default {
     components: {
       Menu,
       Footer
     },
-    data(){
+    data() {
       return {
         menuItem: 'index',
         outerVisible: false,
         outerVisible1: false,
         outerVisible2: false,
-        name: '666',
-        phone: '123456789',
-        email: '130065421@qq.com',
-        password: '123',
+        name: '',
+        phone: '',
+        email: '',
+        password: '',
+        suser: {}
       }
     },
     methods: {
@@ -128,9 +131,14 @@
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
+      },
+      $rewrite() {
+        InfoRequest.updateUserInfo(this)
       }
     },
-
+    created() {
+      InfoRequest.getUserInfo(this)
+    }
   }
 </script>
 
