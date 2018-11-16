@@ -29,7 +29,7 @@
       </div>
       <div class="address-info" v-if="active === 0">
         <el-card class="address-box">
-          <div slot="header" class="clearfix">
+          <div slot="header">
             <span style="font-size: 18px"><strong>{{personName}}</strong></span><span>&nbsp;收</span>
             <el-button style="float: right; padding: 3px 0" type="success" icon="el-icon-check" circle></el-button>
           </div>
