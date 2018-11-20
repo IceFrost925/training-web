@@ -1,7 +1,7 @@
 <template>
   <div>
     <Menu :menuItem="menuItem"></Menu>
-    <div class="main">
+    <div class="container">
       <div class="el-header">
           <span style="font-size: 16px">
             <nuxt-link to="/home/home">
@@ -9,60 +9,33 @@
             </nuxt-link>
             <span>/</span>
             <nuxt-link to="/cartoon/cartoon">
-              <el-button type="text">动漫</el-button>
+              <el-button type="text">{{first}}</el-button>
             </nuxt-link>
           </span>
-      </div>
-      <div class="border">
-        <span style="padding-left: 20px">商品分类</span>
-        <el-menu
-          default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-caret-right"></i>
-              <nuxt-link to="/cartoon/cartoon">
-                <el-button type="text" style="color: #000000">动漫</el-button>
-              </nuxt-link>
-            </template>
-            <el-menu-item-group>
-              <el-menu-item index="1-1"><i class="el-icon-arrow-right"></i>海伦凯勒</el-menu-item>
-              <el-menu-item index="1-2"><i class="el-icon-arrow-right"></i>邦士度</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-
-          <el-submenu index="2">
-            <template slot="title">
-              <i class="el-icon-caret-right"></i>
-              <nuxt-link to="/literature/literature">
-                <el-button type="text" style="color: #000000">文学</el-button>
-              </nuxt-link>
-            </template>
-            <el-menu-item-group>
-              <el-menu-item index="2-1"><i class="el-icon-arrow-right"></i>shes茜子</el-menu-item>
-              <el-menu-item index="2-2"><i class="el-icon-arrow-right"></i>艾薇莎</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-
-          <el-submenu index="3">
-            <template slot="title">
-              <i class="el-icon-caret-right"></i>
-              <nuxt-link to="/science/science">
-                <el-button type="text" style="color: #000000">科学</el-button>
-              </nuxt-link>
-            </template>
-            <el-menu-item-group>
-              <el-menu-item index="3-1"><i class="el-icon-arrow-right"></i>暴龙</el-menu-item>
-              <el-menu-item index="3-2"><i class="el-icon-arrow-right"></i>阿木</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-        </el-menu>
-      </div>
-      <div>
-        <div class="box">
-          <h3>动漫</h3>
+    </div>
+      <div class="content">
+        <div class="left-coon">
+          <span style="padding-left: 20px">商品分类</span>
+          <el-menu
+            :default-active="menuItem"
+            class="el-menu-vertical-demo"
+            :unique-opened="flag"
+            :default-openeds="all"
+            @select="handleSelect">
+            <el-submenu :index="item.first" v-for="(item,index) in menuList" :key="index">
+              <template slot="title">{{item.first}}</template>
+              <el-menu-item :index="sec" v-for="(sec,index) in item.second" :key="index" v-if="item.second">{{sec}}
+              </el-menu-item>
+            </el-submenu>
+          </el-menu>
+        </div>
+        <div class="right-coon">
+          <div>
+            <h3>{{first}}</h3>
+            <BookShow :books="lastedGoods"></BookShow>
+          </div>
         </div>
       </div>
-
     </div>
     <Footer></Footer>
   </div>
@@ -71,56 +44,70 @@
 <script>
   import Menu from '../../components/menu/menu'
   import Footer from '../../components/footer/footer'
+  import BookShow from '../../components/book-show/index'
+  import * as CarToonRequest from '../../assets/cartoon/cartoon'
   export default {
     components: {
       Menu,
-      Footer
+      Footer,
+      BookShow
     },
     data(){
       return {
-        menuItem: 'index',
+        menuItem: '动漫',
+        menuList: [],
+        first: '动漫',
+        all: [],
+        flag: true,
+        lastedGoods: []
       }
     },
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+      handleSelect(key, keyPath){
+        console.log(key)
+        this.menuItem = key
+        this.activityIndex = key
+        this.first = keyPath[0]
+        CarToonRequest.getBookByType(this)
       }
-    },
 
+    },
+    created(){
+      CarToonRequest.getMenus(this)
+      if(this.$route.params.menuType !== null){
+        this.menuItem = this.$route.params.menuType
+        this.activityIndex = this.$route.params.menuType
+        this.first = this.$route.params.first
+        this.all = this.$route.params.all
+      }
+    }
   }
 </script>
 
 <style>
-  .main {
-    margin: 0 150px;
-    padding: 50px;
+  .container {
+    padding: 50px 190px;
     min-height: 500px;
   }
 
+  .content{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
   .el-header {
     padding: 0 20px;
     box-sizing: border-box;
   }
 
-  .border {
-    position: absolute;
-    border: 1px solid #dad5d5;
-    border-radius: 5%;
-    padding: 20px;
-    box-sizing: border-box;
+  .left-coon {
+    display: inline-block;
     width: 250px;
   }
 
-  .box {
-    position: absolute;
-    top: 330px;
-    left: 480px;
-    box-shadow: 0 1px 0 #888;
-    width: 600px;
-    padding-bottom: 5px;
+  .right-coon {
+    padding-left: 30px;
+    display: inline-block;
   }
 
 </style>

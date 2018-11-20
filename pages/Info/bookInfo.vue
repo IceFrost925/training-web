@@ -9,27 +9,27 @@
             </nuxt-link>
             <span>/</span>
             <nuxt-link to="/info/bookInfo">
-              <el-button type="text">{{bookName}}</el-button>
+              <el-button type="text">{{book.name}}</el-button>
             </nuxt-link>
           </span>
       </div>
       <div class="aside">
-        <img :src="productImg" style="width: 400px;height: 400px"/>
+        <img :src="book.picture" style="width: 250px;height: 300px"/>
       </div>
       <el-main>
         <div class="box" style="padding-bottom: 30px">
-          <h2>{{bookName}}</h2>
+          <h2>{{book.name}}</h2>
         </div>
         <div class="box">
-          <span>型号</span><span style="padding-left: 80px">{{bookNumber}}</span>
+          <span>型号</span><span style="padding-left: 80px">{{book.number}}</span>
           <h2></h2>
-          <span>库存状态</span><span style="padding-left: 50px">{{bookCount}}</span>
+          <span>库存状态</span><span style="padding-left: 50px">{{book.count}}</span>
         </div>
         <div class="box">
-          <span style="font-size: 36px">￥{{bookPrice}}</span>
+          <span style="font-size: 36px">￥{{book.price}}</span>
         </div>
         <div class="box">
-          <el-input-number size="small" v-model="buyNumber"></el-input-number>
+          <el-input-number size="small" v-model="buyNumber" :min="1"></el-input-number>
           <el-button type="danger" round size="small">加入购物车</el-button>
           <h1 style="padding-top: 10px "></h1>
           <span><i class="el-icon-star-off"></i>
@@ -47,7 +47,7 @@
             <div>
               <div style="padding-top: 20px">
                 <label>
-                  {{bookSummary}}
+                  {{book.describe}}
                 </label>
               </div>
             </div>
@@ -55,11 +55,11 @@
           <el-tab-pane label="商品评价" name="second">
             <div>
               <div v-if="commentStatus">
-                <div v-for="o in 4" :key="o">
+                <div v-for="(item,index) in apprice" :key="index">
                   <el-card class="box-card comment shape ">
                     <img :src=" head" height="60" width="60"/>
-                    <span class="user-name">{{userName}}</span>
-                    <p class="user-comment">{{userComment}}</p>
+                    <span class="user-name">{{item.suser.username}}</span>
+                    <p class="user-comment">{{item.content}}</p>
                   </el-card>
                 </div>
               </div>
@@ -69,14 +69,14 @@
               <h4 style="padding-top: 30px">如果您对本商品有什么问题或经验，请在此留下您的意见和建议！</h4>
               <el-form ref="form" :model="form" label-width="100px">
                 <el-form-item label="您的姓名：" prop="name">
-                  <el-input v-model="form.name"></el-input>
+                  <el-rate v-model="form.start"></el-rate>
                 </el-form-item>
                 <el-form-item label="您的评价：">
                   <el-input type="textarea" v-model="form.comment"></el-input>
                 </el-form-item>
                 <el-form-item>
-                  <el-button type="primary" @click="submitForm('ruleForm')">立即提交</el-button>
-                  <el-button @click="resetForm('ruleForm')">重置</el-button>
+                  <el-button type="primary" @click="submitForm">立即提交</el-button>
+                  <el-button @click="resetForm">重置</el-button>
                 </el-form-item>
               </el-form>
             </div>
@@ -90,6 +90,7 @@
 
 <script>
   import Menu from '../../components/menu/menu'
+  import * as BookRequest from '../../assets/info/bookInfo'
   import Footer from '../../components/footer/footer'
   export default {
     components: {
@@ -99,6 +100,9 @@
     data(){
       return {
         menuItem: 'index',
+        id: 0,
+        book: {},
+        apprice:[],
         bookName: '追风筝的人',
         productImg: '../img/product1.png',
         bookNumber: '111100',
@@ -118,7 +122,7 @@
         userComment: 'jsdjfkjefewjkns人家可能那就是发表哦i看你发的是iOK美式咖啡' +
         '电脑发快递师傅你就开始地方搞大锅饭大概多少广泛大锅饭大锅饭大概',
         form: {
-          name: '',
+          star: 0,
           comment: ''
         }
       }
@@ -127,20 +131,22 @@
       handleClick(tab, event) {
         console.log(tab, event);
       },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('提交成功!');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
+      submitForm() {
+        BookRequest.addBookApprice(this)
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
+      resetForm() {
+        this.form.star = 0
+        this.form.comment = ''
       }
     },
+    created(){
+      if(this.$route.query.id !== null){
+        this.id = this.$route.query.id
+        console.log(this.$route.query.id)
+        BookRequest.getBookInfo(this)
+      }
+
+    }
 
   }
 </script>
@@ -214,5 +220,8 @@
 
   .user-comment {
     font-size: 14px;
+  }
+  .el-card__body {
+    display: block;
   }
 </style>

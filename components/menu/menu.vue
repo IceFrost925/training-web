@@ -76,7 +76,7 @@
     </div>
     <div class="menu-list">
       <el-menu
-        :default-active="activeIndex2"
+        :default-active="activeIndex"
         class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
@@ -84,7 +84,7 @@
         text-color="#fff"
         active-text-color="#ffd04b">
         <el-menu-item index="index">首页</el-menu-item>
-        <el-submenu index="cartoon-cartoon" v-for="(item,index) in menuList" :key="index">
+        <el-submenu :index="item.first" v-for="(item,index) in menuList" :key="index">
           <template slot="title">{{item.first}}</template>
           <el-menu-item :index="sec" v-for="(sec,index) in item.second" :key="index" v-if="item.second">{{sec}}
           </el-menu-item>
@@ -118,7 +118,7 @@
         wishList: 0,
         shoppingCount: 0,
         shoppingTotal: 0.00,
-        activeIndex2: '1',
+        activeIndex: 'index',
         query: '',
         username: '',
         id: 0
@@ -126,7 +126,6 @@
     },
     methods: {
       handleCommand(command) {
-        this.$message('click on item ' + command);
         switch (command) {
           case 'a':
             this.$router.push({
@@ -156,31 +155,31 @@
       },
       handleSelect(key, keyPath) {
         this.activeIndex = key
-        this.$router.push({
-          name: keyPath[0],
-          params: {
-            menuType: key
-          }
-        })
-
-        if (this.$route.name === 'introduction-to-the-introduction-to-the') {
-          this.$emit('refresh', key);
-        } else if (this.$route.name === 'the-first-team-the-first-team') {
-          this.$emit('refresh', key);
-        } else if (this.$route.name === 'youth-youth') {
-          this.$emit('refresh', key);
-        } else if (this.$route.name === 'event-event') {
-          this.$emit('refresh', key);
+        if(key == 'index'){
+          this.$router.push({
+            name: key,
+            params: {
+              menuType: key,
+            }
+          })
+        }else {
+          this.$router.push({
+            name: "cartoon-cartoon",
+            params: {
+              menuType: key,
+              first: keyPath[0],
+              all: keyPath
+            }
+          })
         }
-        console.log(this.activeIndex)
-
+        this.$emit('refresh', key);
       },
       $btn_search() {
 
       }
     },
     created() {
-
+      this.activeIndex = this.menuItem
       if (Cookies.get("suserId") == null || typeof(Cookies.get("suserId")) == undefined) {
 
       } else {
@@ -195,10 +194,12 @@
         MenuRequest.getShoppingCount(this, Cookies.get("suserId"))
       }
       MenuRequest.getMenus(this)
+
     },
     watch: {
       menuItem() {
-        this.activeIndex2 = this.menuItem;
+        console.log(this.menuItem ,1111)
+        this.activeIndex = this.menuItem;
       }
     }
   }
