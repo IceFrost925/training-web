@@ -25,3 +25,5 @@ export const getLastedBooks = (vm) =>{
       vm.lastedGoods = rep.data.data
     })
 }
+
+

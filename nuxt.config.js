@@ -35,7 +35,8 @@ module.exports = {
   */
   plugins: [
     {src: '@/plugins/element-ui', ssr: true},
-    '@/plugins/axios'
+    {src: '@/plugins/axios', ssr: true},
+
   ],
 
   /*
@@ -66,6 +67,7 @@ module.exports = {
     */
     extend(config, ctx) {
 
-    }
+    },
+    vendor: ['element-ui', 'axios']
   }
 }

@@ -20,14 +20,49 @@ export const getShoppingCount = (vm,id) => {
           TotalPrice += parseInt(item.number) * item.bookId.price
         })
 
-        Cookies.set('shoppingCount', rep.data.data.length);
-        Cookies.set('TotalPrice', TotalPrice.toFixed(2));
+        vm.Count= rep.data.data.length
+        vm.shoppingTotal = parseFloat(TotalPrice.toFixed(2))
         vm.shopCardList = rep.data.data
-      }else{
-        Cookies.set('shoppingCount', 0);
       }
     })
     .catch(function () {
       vm.$message.success('查询失败')
+    })
+}
+
+export const getWishList = (vm) => {
+  let data = Qs.stringify({
+    userId: Cookies.get("suserId"),
+  })
+  vm.$axios.post('/permit/collect/select/userId', data)
+    .then(rep => {
+      if (rep.data.data.length >= 0) {
+        vm.wishList = rep.data.data.length
+
+      }
+    })
+    .catch(function () {
+      vm.$message.success('异常情况')
+    })
+}
+
+
+export const selectBookByName = (vm) =>{
+  let data = Qs.stringify({
+    name: vm.query
+  })
+  vm.$axios.post('/permit/books/select/name',data)
+    .then(rep =>{
+      if(rep.data.data.length>0){
+        rep.data.data.forEach(item =>{
+          item.extra1 = parseInt(item.extra1)
+          item.price = parseFloat(item.price)
+        })
+        console.log(rep.data.data)
+        vm.books = rep.data.data
+      }else{
+        vm.$message.success("暂无此书")
+      }
+
     })
 }

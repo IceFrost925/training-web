@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Menu :menuItem="menuItem"></Menu>
+    <Menu :menuItem="menuItem" @refresh="refresh"></Menu>
     <div class="container">
       <div class="el-header">
           <span style="font-size: 16px">
@@ -68,6 +68,11 @@
         this.menuItem = key
         this.activityIndex = key
         this.first = keyPath[0]
+        CarToonRequest.getBookByType(this)
+      },
+      refresh(val){
+        this.menuItem = val
+        this.activityIndex = val
         CarToonRequest.getBookByType(this)
       }
 

@@ -3,15 +3,19 @@
     <Menu :menuItem="menuItem"></Menu>
     <div class="main">
       <div class="el-header">
-          <span style="font-size: 16px">
-            <nuxt-link to="/home/home">
-              <el-button type="text">首页</el-button>
-            </nuxt-link>
-            <span>/</span>
-            <nuxt-link to="/order/collect">
-              <el-button type="text">我的收藏</el-button>
-            </nuxt-link>
-          </span>
+        <span style="font-size: 16px">
+          <nuxt-link to="/">
+          <el-button type="text">首页</el-button>
+        </nuxt-link>
+          <span>/</span>
+        <nuxt-link to="/order/shopping">
+          <el-button type="text">购物车</el-button>
+        </nuxt-link>
+        <span>/</span>
+        <nuxt-link to="/order/collect">
+          <el-button type="text">收藏</el-button>
+        </nuxt-link>
+        </span>
       </div>
       <div class="box">
         <h1 style="color: #000000;padding-bottom: 30px">我的收藏夹</h1>
@@ -62,10 +66,10 @@
     },
     methods: {
       deleteRow(row) {
-        OrderRequest.deleteWishList(this,row)
+        OrderRequest.deleteWishList(this, row)
       },
-      addShopping(row){
-        OrderRequest.addShopping(this,row)
+      addShopping(row) {
+        OrderRequest.addShopping(this, row)
       }
     },
     created() {
@@ -87,6 +91,7 @@
   }
 
   .box {
+    width: 100%;
     padding-top: 20px;
     padding-left: 20px;
   }

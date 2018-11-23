@@ -4,75 +4,74 @@
 <template>
   <div class="menu">
     <div class="menu-content">
-      <el-row class="menu-row1">
-        <el-col :span="12" v-if="loginFlag">
-          <span>尊敬的用户您好！</span>
-          <span>
+      <no-ssr>
+        <el-row class="menu-row1">
+          <el-col :span="12" v-if="loginFlag">
+            <span>尊敬的用户您好！</span>
             <nuxt-link to="../../login/login">[登录]</nuxt-link>
             <nuxt-link to="../../register/register">[注册]</nuxt-link>
-          </span>
-        </el-col>
-        <el-col :span="12" v-else>
-          <span>尊敬的{{username}}用户您好！</span>
-        </el-col>
-        <el-col :span="12" class="top-menu-right" v-if="loginFlag">
-        <span><el-dropdown @command="handleCommand">
+          </el-col>
+          <el-col :span="12" v-else>
+            尊敬的{{username}}用户您好！
+          </el-col>
+          <el-col :span="12" class="top-menu-right" v-if="loginFlag">
+            <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             会员中心<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="d">会员登陆</el-dropdown-item>
-            <el-dropdown-item command="e">会员注册</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown></span>
-          <nuxt-link to="../../order/collect">收藏 ({{wishList}})</nuxt-link>
-          <nuxt-link to="../../order/shopping">购物车</nuxt-link>
-          <nuxt-link to="#">结账</nuxt-link>
-        </el-col>
-        <el-col :span="12" class="top-menu-right" v-else>
-        <span><el-dropdown @command="handleCommand">
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item command="d">会员登陆</el-dropdown-item>
+                <el-dropdown-item command="e">会员注册</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <nuxt-link to="../../order/collect">收藏 ({{wishList}})</nuxt-link>
+            <nuxt-link to="../../order/shopping">购物车</nuxt-link>
+            <nuxt-link to="../../my-order">结账</nuxt-link>
+          </el-col>
+          <el-col :span="12" class="top-menu-right" v-else>
+            <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             会员中心<i class="el-icon-arrow-down el-icon--right"></i>
           </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="a">个人信息</el-dropdown-item>
-            <el-dropdown-item command="b">我的订单</el-dropdown-item>
-            <el-dropdown-item command="c">注销登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown></span>
-          <nuxt-link to="../../order/collect">收藏 ({{wishList}})</nuxt-link>
-          <nuxt-link to="../../order/shopping">购物车</nuxt-link>
-          <nuxt-link to="#">结账</nuxt-link>
-        </el-col>
-      </el-row>
-      <el-row class="menu-row2">
-        <el-col :span="12">
-          <img src="http://theme.opencartdemo.cn/book-2102-cn/image/catalog/logo3.png" alt="">
-        </el-col>
-        <el-col :span="12" class="top-menu-right">
-          <el-popover
-            placement="top-start"
-            width="300"
-            trigger="hover">
-            <div v-for="(item, index) in shopCardList" :key="index">
-              <el-card :body-style="{ padding: '0px' }">
-                <img :src="item.bookId.picture" class="image" width="80" height="100" style="display: inline-block">
-                <div class="shop-card-right">
-                  <div>
-                    <div class="shop-card-name">{{item.bookId.name}}</div>
-                    <span>x{{item.number}}</span>
+              <el-dropdown-menu slot="dropdown" >
+                <el-dropdown-item command="a">会员中心</el-dropdown-item>
+                <el-dropdown-item command="b">我的订单</el-dropdown-item>
+                <el-dropdown-item command="c">注销登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+            <nuxt-link to="../../order/collect">收藏 ({{wishList}})</nuxt-link>
+            <nuxt-link to="../../order/shopping">购物车</nuxt-link>
+            <nuxt-link to="../../my-order">结账</nuxt-link>
+          </el-col>
+        </el-row>
+        <el-row class="menu-row2">
+          <el-col :span="12">
+            <img src="http://theme.opencartdemo.cn/book-2102-cn/image/catalog/logo3.png" alt="">
+          </el-col>
+          <el-col :span="12" class="top-menu-right">
+            <el-popover
+              placement="bottom"
+              width="300"
+              trigger="hover">
+              <div v-for="(item, index) in shopCardList" :key="index">
+                <el-card :body-style="{ padding: '0px' }">
+                  <img :src="item.bookId.picture" class="image" width="80" height="100" style="display: inline-block">
+                  <div class="shop-card-right">
+                    <div>
+                      <div class="shop-card-name">{{item.bookId.name}}</div>
+                      <span>x{{item.number}}</span>
+                    </div>
+                    <div>
+                      <el-button type="text" class="button">￥{{item.bookId.price}}</el-button>
+                    </div>
                   </div>
-                  <div>
-                    <el-button type="text" class="button">￥{{item.bookId.price}}</el-button>
-                  </div>
-                </div>
-              </el-card>
-            </div>
-            <nuxt-link to="/order/shopping" slot="reference">{{shoppingCount}}-个商品 -￥{{shoppingTotal}}</nuxt-link>
-          </el-popover>
-
-        </el-col>
-      </el-row>
+                </el-card>
+              </div>
+              <nuxt-link to="/order/shopping" slot="reference">{{Count}}-个商品 -￥{{shoppingTotal}}</nuxt-link>
+            </el-popover>
+          </el-col>
+        </el-row>
+      </no-ssr>
     </div>
     <div class="menu-list">
       <el-menu
@@ -104,10 +103,18 @@
   import * as MenuRequest from '../../assets/menu/menu'
 
   export default {
-    Props: {
+    props: {
       menuItem: {
         type: String,
         default: 'index',
+      },
+      TotalPrice: {
+        type: Number,
+        default: 0,
+      },
+      shoppingCount: {
+        type: Number,
+        default: 0,
       }
     },
     data() {
@@ -116,12 +123,13 @@
         shopCardList: [],
         menuList: [],
         wishList: 0,
-        shoppingCount: 0,
+        Count: 0,
         shoppingTotal: 0.00,
         activeIndex: 'index',
         query: '',
         username: '',
-        id: 0
+        id: 0,
+        books:[]
       }
     },
     methods: {
@@ -133,7 +141,9 @@
             })
             break;
           case 'b':
-
+            this.$router.push({
+              name: 'my-order'
+            })
             break;
           case 'c':
             Cookies.set("suserId", "", -1)
@@ -155,14 +165,14 @@
       },
       handleSelect(key, keyPath) {
         this.activeIndex = key
-        if(key == 'index'){
+        if (key == 'index') {
           this.$router.push({
             name: key,
             params: {
               menuType: key,
             }
           })
-        }else {
+        } else {
           this.$router.push({
             name: "cartoon-cartoon",
             params: {
@@ -175,7 +185,13 @@
         this.$emit('refresh', key);
       },
       $btn_search() {
-
+        MenuRequest.selectBookByName(this)
+        this.$router.push({
+          path: '/home/home',
+          query: {
+            bookList: this.books
+          }
+        })
       }
     },
     created() {
@@ -188,8 +204,6 @@
         if (Cookies.get("username") != 'null') {
           this.username = Cookies.get("username")
         }
-        this.shoppingCount = Cookies.get("shoppingCount")
-        this.shoppingTotal = Cookies.get("TotalPrice")
         this.wishList = Cookies.get("wishList");
         MenuRequest.getShoppingCount(this, Cookies.get("suserId"))
       }
@@ -198,8 +212,16 @@
     },
     watch: {
       menuItem() {
-        console.log(this.menuItem ,1111)
+        console.log(this.menuItem, 1111)
         this.activeIndex = this.menuItem;
+      },
+      TotalPrice(){
+        console.log(this.TotalPrice, 1111)
+        this.shoppingTotal = this.TotalPrice
+      },
+      shoppingCount() {
+        console.log(this.shoppingCount, 1111)
+        this.Count = this.shoppingCount
       }
     }
   }

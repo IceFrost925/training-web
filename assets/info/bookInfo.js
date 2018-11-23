@@ -21,7 +21,6 @@ export const getBookApprice = (vm) =>{
     })
 }
 
-
 export const addBookApprice = (vm) =>{
   let data = {
     bookIdId: vm.id,
@@ -43,4 +42,19 @@ export const addBookApprice = (vm) =>{
     })
 }
 
+export const addShoppingList = (vm) =>{
+  let data = {
+    bookIdId: vm.book.id,
+    number: vm.buyNumber,
+    suserId: Cookies.get("suserId")
+  }
+  vm.$axios.post("/permit/shopping",data)
+    .then(rep =>{
+      vm.$message.success("添加成功")
+    })
+    .catch(function () {
+      vm.$message.success("异常情况")
+
+    })
+}
 

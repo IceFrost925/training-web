@@ -4,12 +4,16 @@
     <div class="main">
       <div class="el-header">
           <span style="font-size: 16px">
-            <nuxt-link to="/home/home">
+            <nuxt-link to="/">
               <el-button type="text">首页</el-button>
             </nuxt-link>
             <span>/</span>
             <nuxt-link to="/info/info">
               <el-button type="text">会员中心</el-button>
+            </nuxt-link>
+            <span>/</span>
+            <nuxt-link to="/address/address">
+              <el-button type="text">收货地址</el-button>
             </nuxt-link>
             <span>/</span>
             <nuxt-link to="/password/password">
@@ -21,7 +25,7 @@
         <el-menu>
           <el-menu-item index="1">
             <nuxt-link to="/info/info">
-              <el-button type="text" style="color: #000000">个人信息</el-button>
+              <el-button type="text" style="color: #000000">会员中心</el-button>
             </nuxt-link>
           </el-menu-item>
           <el-menu-item index="2">
@@ -62,6 +66,7 @@
 </template>
 
 <script>
+  import * as infoRequest from '../../assets/info/info'
   import Menu from '../../components/menu/menu'
   import Footer from '../../components/footer/footer'
   export default {
@@ -100,6 +105,10 @@
       };
       return {
         menuItem: 'index',
+        name: '',
+        phone: '',
+        email: '',
+        suser: {},
         ruleForm: {
           psd1: '',
           psd2: ''
@@ -120,7 +129,7 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            alert('修改成功!');
+            infoRequest.updatePassword(this)
           } else {
             console.log('修改失败!');
             return false;
@@ -131,7 +140,9 @@
         this.$refs[formName].resetFields();
       }
     },
-
+    created(){
+      infoRequest.getUserInfo(this)
+    }
   }
 </script>
 

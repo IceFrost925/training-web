@@ -30,7 +30,7 @@
         </div>
         <div class="box">
           <el-input-number size="small" v-model="buyNumber" :min="1"></el-input-number>
-          <el-button type="danger" round size="small">加入购物车</el-button>
+          <el-button type="danger" round size="small" @click="$addShopping">加入购物车</el-button>
           <h1 style="padding-top: 10px "></h1>
           <span><i class="el-icon-star-off"></i>
               <el-button type="text" class="collect_btn">收藏</el-button>
@@ -137,6 +137,9 @@
       resetForm() {
         this.form.star = 0
         this.form.comment = ''
+      },
+      $addShopping(){
+        BookRequest.addShoppingList(this)
       }
     },
     created(){

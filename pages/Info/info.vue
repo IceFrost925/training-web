@@ -4,16 +4,20 @@
     <div class="main">
       <div class="el-header">
           <span style="font-size: 16px">
-            <nuxt-link to="/home/home">
+            <nuxt-link to="/">
               <el-button type="text">首页</el-button>
             </nuxt-link>
             <span>/</span>
-            <nuxt-link to="/info/info">
-              <el-button type="text">会员中心</el-button>
+            <nuxt-link to="/address/address">
+              <el-button type="text">收货地址</el-button>
             </nuxt-link>
             <span>/</span>
+            <nuxt-link to="/password/password">
+              <el-button type="text">修改密码</el-button>
+            </nuxt-link>
+              <span>/</span>
             <nuxt-link to="/info/info">
-              <el-button type="text">个人信息</el-button>
+              <el-button type="text">会员中心</el-button>
             </nuxt-link>
           </span>
       </div>
@@ -21,7 +25,7 @@
         <el-menu>
           <el-menu-item index="1">
             <nuxt-link to="/info/info">
-              <el-button type="text" style="color: #000000">个人信息</el-button>
+              <el-button type="text" style="color: #000000">会员中心</el-button>
             </nuxt-link>
           </el-menu-item>
           <el-menu-item index="2">
@@ -39,7 +43,7 @@
       <div class="infoBox">
         <div class="box">
           <h3>
-            <strong>个人信息</strong>
+            <strong>会员中心</strong>
           </h3>
           <div class="border"></div>
           <div class="info-wapper">
@@ -178,6 +182,7 @@
   }
 
   label {
+    margin-left: 0!important;
     width: 100px;
     line-height: 20px;
     padding: 20px 0;

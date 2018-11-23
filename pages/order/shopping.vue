@@ -1,22 +1,34 @@
 <template>
   <div>
-    <Menu :menuItem="menuItem"></Menu>
+    <Menu :TotalPrice="TotalPrice" :shoppingCount="shoppingCount"></Menu>
     <div class="main">
       <div class="el-header">
-          <span style="font-size: 16px">
-            <nuxt-link to="/home/home">
-              <el-button type="text">首页</el-button>
-            </nuxt-link>
-            <span>/</span>
-            <nuxt-link to="/order/shopping">
-              <el-button type="text">我的购物车</el-button>
-            </nuxt-link>
+        <span style="font-size: 16px">
+        <nuxt-link to="/">
+          <el-button type="text">首页</el-button>
+        </nuxt-link>
+        <span>/</span>
+        <nuxt-link to="/order/collect">
+          <el-button type="text">收藏</el-button>
+        </nuxt-link>
+        <span>/</span>
+        <nuxt-link to="/order/shopping">
+          <el-button type="text">购物车</el-button>
+        </nuxt-link>
           </span>
       </div>
       <div class="buy-box">
         <h1 style="color: #000000;padding-bottom: 30px">购物车内的商品</h1>
         <el-card>
-          <el-table :data="tableData" style="width: 100%;" @row-click="$changeId">
+          <el-table
+            :data="tableData"
+            style="width: 100%;"
+            @row-click="$changeId"
+            @selection-change="$handleSelectionChange">
+            <el-table-column
+              type="selection"
+              width="55">
+            </el-table-column>
             <el-table-column fixed prop="bookId.picture" label="图片" width="150" height="200">
               <template slot-scope="scope">
                 <img  :src="scope.row.bookId.picture" alt="" style="width: 50px;height: 50px">
@@ -30,7 +42,11 @@
               </template>
             </el-table-column>
             <el-table-column prop="bookId.price" label="单价" width="120"></el-table-column>
-            <el-table-column prop="totalMoney" label="总价" width="120"></el-table-column>
+            <el-table-column prop="totalMoney" label="总价" width="120">
+              <template slot-scope="scope">
+                {{(scope.row.bookId.price * scope.row.number).toFixed(2)}}
+              </template>
+            </el-table-column>
             <el-table-column label="操作" width="120">
               <template slot-scope="scope">
                 <el-button @click.native.prevent="deleteRow(scope.row)" type="text" size="small">
@@ -39,13 +55,13 @@
               </template>
             </el-table-column>
           </el-table>
-          <!--<div class="box">
-            <label>订单总金额 : 1111.00</label>
-          </div>
-          <div class="btn">
-            <el-button type="primary">去结账</el-button>
-          </div>-->
         </el-card>
+        <div class="total">
+          <label>订单总金额 : {{total}}</label>
+        </div>
+        <div class="btn">
+          <el-button type="primary" @click="$orderBuy" :disabled=goOrder>去结账</el-button>
+        </div>
       </div>
     </div>
     <Footer></Footer>
@@ -64,10 +80,14 @@
     },
     data(){
       return {
-        menuItem: 'index',
+        goOrder: true,
         number: 0,
         tableData: [],
+        selectItem: [],
         shoppingId: 0,
+        total: 0,
+        TotalPrice: 0,
+        shoppingCount: 0
       }
     },
     methods: {
@@ -75,12 +95,33 @@
         OrderRequest.deleteShopping(this,row)
       },
       $changeId(row, event, column){
-        console.log(row)
         this.shoppingId = row.id
       },
       $changeNumber(val){
         this.number = val
         OrderRequest.updateItemNumber(this)
+      },
+      $handleSelectionChange(val){
+        this.total = 0;
+        this.selectItem = []
+        val.forEach(item=>{
+          this.total += parseInt(item.number) * item.bookId.price
+          this.selectItem.push(item.id)
+        })
+        this.total = this.total.toFixed(2)
+        if(val.length>0){
+          this.goOrder = false
+        }else{
+          this.goOrder = true
+        }
+      },
+      $orderBuy(){
+        this.$router.push({
+            path: '/order/account',
+            query: {
+              orderList: this.selectItem
+            }
+          })
       }
     },
     created(){
@@ -106,12 +147,10 @@
     padding-left: 20px;
   }
 
-  .box {
+  .total {
     box-shadow: 0 1px 0 #888;
-    width: auto;
     padding: 50px;
   }
-
   label {
     margin-left: 70%;
   }
