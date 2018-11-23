@@ -10,7 +10,7 @@ export const getRegister = (vm) => {
       if (rep.data.result) {
         vm.$message.success('注册成功')
         vm.$router.push({
-          name: 'index'
+          name: 'login-login'
         })
       } else {
         vm.$message.success('注册失败')

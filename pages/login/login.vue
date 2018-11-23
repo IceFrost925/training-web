@@ -2,7 +2,7 @@
   @import "./login.less";
 </style>
 <template>
-  <div>
+  <div class="login-main">
     <div class="main">
       <div class="login">
         <el-card :bordered="false">

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login-main">
     <div class="main">
       <div class="register">
         <el-card :bordered="false">
@@ -92,6 +92,11 @@
 </script>
 
 <style>
+  .login-main{
+    height: 695px;
+    background-image: url("../../static/img/login_bg.jpg");
+    background-size: cover;
+  }
   .register {
     position: absolute;
     right: 300px;
