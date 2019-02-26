@@ -8,6 +8,7 @@ export const addShoppingList = (vm,id) =>{
   }
   vm.$axios.post("/permit/shopping",data)
     .then(rep =>{
+      console.log(rep)
       vm.$message.success("添加成功")
     })
     .catch(function () {
@@ -23,6 +24,7 @@ export const addCollectList = (vm,id) =>{
   }
   vm.$axios.post("/permit/collect",data)
     .then(rep =>{
+      Cookies.set('wishList', rep.data.data.length);
       vm.$message.success("添加成功")
     })
     .catch(function () {

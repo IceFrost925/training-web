@@ -18,6 +18,7 @@ export const getBookApprice = (vm) =>{
   vm.$axios.post("/permit/apparaise/select/bookId",data)
     .then(rep =>{
         vm.apprice = rep.data.data
+      console.log(vm.apprice)
     })
 }
 
@@ -50,6 +51,7 @@ export const addShoppingList = (vm) =>{
   }
   vm.$axios.post("/permit/shopping",data)
     .then(rep =>{
+      console.log(rep)
       vm.$message.success("添加成功")
     })
     .catch(function () {
